@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Riley del Fierro</title>
+<meta name="description" content="Riley del Fierro — applied AI engineer in Seattle building AI agents, MCP servers, and serverless automation on AWS.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a spec-sheet page — section labels sit in a left margin rail on wide screens, stacking above content on phones. */
+:root {
+  --bg: #F1F3F2;
+  --surface: #FFFFFF;
+  --fg: #14191C;
+  --muted: #56636B;
+  --line: #D3D9DB;
+  --accent: #1E5E78;
+  --accent-soft: #DCE8EE;
+  --guard: #9A6413;
+  --guard-soft: #F4E7D2;
+  --ok: #2F6B45;
+  --block: #9B2F2F;
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F1417; --surface: #172026; --fg: #E5EAEC; --muted: #9AA8B0; --line: #2A363D;
+    --accent: #7DBBD6; --accent-soft: #1C3340; --guard: #E2AE5C; --guard-soft: #3A2C17;
+    --ok: #7CC495; --block: #E58A8A; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F1417; --surface: #172026; --fg: #E5EAEC; --muted: #9AA8B0; --line: #2A363D;
+  --accent: #7DBBD6; --accent-soft: #1C3340; --guard: #E2AE5C; --guard-soft: #3A2C17;
+  --ok: #7CC495; --block: #E58A8A; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--body); font-size: 16px; line-height: 1.6;
+  font-variation-settings: "wdth" 100;
+}
+.wrap {
+  max-width: 1080px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 48px 72px;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+
+/* Hero */
+.hero { display: grid; gap: 20px; padding-bottom: 40px; border-bottom: 1px solid var(--line); }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 {
+  font-size: clamp(44px, 9vw, 96px); line-height: .92; font-weight: 800;
+  font-variation-settings: "wdth" 118; letter-spacing: -.01em;
+}
+.thesis { font-size: clamp(19px, 2.4vw, 24px); line-height: 1.4; max-width: 34ch; margin: 0; }
+.thesis em { font-style: normal; color: var(--accent); }
+.contact { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; font-size: 15px; }
+.copy {
+  font: inherit; font-family: var(--mono); font-size: 14px; background: var(--surface); color: var(--fg);
+  border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; cursor: pointer;
+}
+.copy:hover { border-color: var(--accent); }
+.copy span { color: var(--muted); margin-left: 8px; font-size: 12px; }
+
+/* Section rail */
+section { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 32px; padding-block: 44px; border-bottom: 1px solid var(--line); }
+section > .label { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-top: 6px; }
+section > .label b { display: block; color: var(--fg); font-weight: 600; margin-bottom: 4px; }
+section h2 { font-size: clamp(26px, 3.4vw, 34px); font-variation-settings: "wdth" 112; font-weight: 700; line-height: 1.1; margin-bottom: 14px; }
+.lede { color: var(--muted); max-width: 62ch; margin: 0 0 24px; }
+@media (max-width: 760px) { section { grid-template-columns: minmax(0, 1fr); gap: 12px; } }
+
+/* Impact */
+.impact { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.stat { background: var(--surface); padding: 20px 18px; display: grid; gap: 6px; align-content: start; }
+.stat .n { font-family: var(--display); font-weight: 800; font-size: 40px; line-height: 1; font-variation-settings: "wdth" 110; font-variant-numeric: tabular-nums; }
+.stat .unit { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+.stat p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.45; }
+@media (max-width: 860px) { .impact { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Projects */
+.projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.project { display: grid; gap: 8px; align-content: start; padding: 18px 20px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--fg); text-decoration: none; }
+.project:hover { border-color: var(--accent); }
+.project .k { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.project .t { font-family: var(--mono); font-size: 18px; font-weight: 600; color: var(--accent); }
+.project .d { font-size: 15px; line-height: 1.5; }
+.project .m { font-family: var(--mono); font-size: 12px; color: var(--ok); }
+@media (max-width: 720px) { .projects { grid-template-columns: minmax(0, 1fr); } }
+
+/* Replay */
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.tab {
+  font: inherit; font-size: 14px; cursor: pointer; padding: 8px 14px; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--fg);
+}
+.tab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.console { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.console-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 10px 16px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.feed { padding: 16px; display: grid; gap: 12px; min-height: 340px; align-content: start; }
+.msg { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; align-items: start; }
+.who { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+.bubble { margin: 0; font-size: 15px; }
+.call, .result {
+  font-family: var(--mono); font-size: 13px; line-height: 1.55; margin: 0; padding: 10px 12px;
+  border-radius: 6px; overflow-x: auto; white-space: pre;
+}
+.call { background: var(--accent-soft); color: var(--fg); }
+.result { background: var(--bg); color: var(--fg); border: 1px solid var(--line); }
+.guard { background: var(--guard-soft); color: var(--fg); border-left: 3px solid var(--guard); padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 14px; margin: 0; }
+.guard b { color: var(--guard); font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; margin-right: 8px; }
+.blocked b { color: var(--block); }
+.blocked { border-left-color: var(--block); }
+.step { animation: rise .35s ease both; }
+@keyframes rise { from { opacity: .0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.replay-actions { display: flex; gap: 10px; padding: 12px 16px; border-top: 1px solid var(--line); flex-wrap: wrap; align-items: center; }
+.btn { font: inherit; font-size: 14px; cursor: pointer; padding: 7px 14px; border-radius: 6px; border: 1px solid var(--accent); background: transparent; color: var(--accent); }
+.btn:hover { background: var(--accent-soft); }
+.note { font-size: 13px; color: var(--muted); margin: 10px 0 0; }
+@media (max-width: 560px) { .msg { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+@media (prefers-reduced-motion: reduce) { .step { animation: none; } }
+
+/* Architecture */
+.arch { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; margin-bottom: 16px; }
+.node {
+  font: inherit; text-align: left; cursor: pointer; padding: 12px 12px 14px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--fg); display: grid; gap: 4px; position: relative;
+}
+.node .k { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.node .t { font-weight: 700; font-size: 15px; line-height: 1.2; }
+.node[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 -3px 0 var(--accent); }
+.node.ai .k { color: var(--accent); }
+.detail { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; display: grid; gap: 8px; }
+.detail h3 { font-size: 19px; font-variation-settings: "wdth" 108; }
+.detail p { margin: 0; max-width: 66ch; }
+.detail ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.chip { font-family: var(--mono); font-size: 12px; padding: 3px 8px; border-radius: 4px; background: var(--bg); border: 1px solid var(--line); color: var(--muted); }
+.principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 28px; }
+.principles h3 { font-size: 16px; margin-bottom: 4px; }
+.principles p { margin: 0; color: var(--muted); font-size: 15px; }
+@media (max-width: 860px) { .arch { grid-template-columns: repeat(3, minmax(0, 1fr)); } .principles { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 440px) { .arch { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Experience */
+.jobs { display: grid; gap: 28px; }
+.job { display: grid; gap: 6px; }
+.job-top { display: flex; justify-content: space-between; gap: 6px 16px; flex-wrap: wrap; align-items: baseline; }
+.job h3 { font-size: 20px; font-variation-settings: "wdth" 108; }
+.when { font-family: var(--mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.role { color: var(--accent); font-weight: 600; font-size: 15px; }
+.job ul { margin: 4px 0 0; padding-left: 18px; display: grid; gap: 6px; max-width: 70ch; }
+.earlier { color: var(--muted); font-size: 15px; margin: 0; }
+
+/* Skills */
+.skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 32px; }
+.skills h3 { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 8px; }
+@media (max-width: 640px) { .skills { grid-template-columns: minmax(0, 1fr); } }
+
+footer { padding-top: 36px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; color: var(--muted); font-size: 14px; }
+</style>
+
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Applied AI Engineer · Seattle, WA</div>
+    <h1>Riley<br>del Fierro</h1>
+    <p class="thesis">I build AI agents that do real operational work, and I measure them the way a pricing analyst would: <em>in hours saved and dollars moved.</em></p>
+    <div class="contact">
+      <a href="mailto:rdfierro@gmail.com">Email</a>
+      <button class="copy" id="copy-email" type="button" data-copy="rdfierro@gmail.com">rdfierro@gmail.com<span id="copy-label">Copy</span></button>
+      <a href="https://www.linkedin.com/in/rdelfierro/">LinkedIn</a>
+      <a href="https://github.com/rdfierro">GitHub</a>
+      <a href="Riley_delFierro_Resume.pdf">Resume (PDF)</a>
+      <span style="color:var(--muted)">Senior Consultant, Unify Consulting</span>
+    </div>
+  </header>
+
+  <section aria-labelledby="impact-h">
+    <div class="label"><b>01</b>Impact</div>
+    <div>
+      <h2 id="impact-h">Results from shipped work</h2>
+      <div class="impact">
+        <div class="stat"><span class="n">84%</span><span class="unit">45 → 7 min per ticket</span><p>Less manual effort per approval ticket on an AWS funding-automation platform with an AI agent front end.</p></div>
+        <div class="stat"><span class="n">8–10</span><span class="unit">hours / week</span><p>Reporting time returned to a non-technical FP&amp;A team using 10 AI skills I built and taught.</p></div>
+        <div class="stat"><span class="n">242</span><span class="unit">fields · 5 systems</span><p>Mapped into one serverless data hub that feeds the agent and the ticket pipeline.</p></div>
+        <div class="stat"><span class="n">3×</span><span class="unit">YoY</span><p>Pricing-program revenue growth for a $1B-revenue client as founder of Pricesmith.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="proj-h">
+    <div class="label"><b>02</b>Open source</div>
+    <div>
+      <h2 id="proj-h">Projects you can run</h2>
+      <div class="projects">
+        <a class="project" href="https://github.com/rdfierro/pricing-mcp">
+          <span class="k">Python · MCP · evals</span>
+          <span class="t">pricing-mcp</span>
+          <span class="d">An MCP server that gives agents pricing analytics: elasticity, price simulation, guardrails, price-ladder and competitor checks. Its eval suite tests the tools against known answers and grades Claude on whether it calls the right tool, respects a blocked price, and only states numbers the tools returned.</span>
+          <span class="m">39 / 39 tool evals passing · 10 agent scenarios</span>
+        </a>
+        <a class="project" href="https://github.com/rdfierro/ai-qbr-reporter">
+          <span class="k">AWS CDK · Bedrock · Step Functions</span>
+          <span class="t">ai-qbr-reporter</span>
+          <span class="d">A hackathon prototype that turns a quarter's KPIs into a draft business review: charts, a Bedrock-written narrative grounded in the data, a Word whitepaper, and a draft email for review.</span>
+          <span class="m">Serverless pipeline · infrastructure as code</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="replay-h">
+    <div class="label"><b>03</b>Agent replay</div>
+    <div>
+      <h2 id="replay-h">How the operations agent behaves</h2>
+      <p class="lede">On my AWS project, operators run the whole workflow by talking to an agent instead of using a web app. The agent reaches the backend through an MCP server I built. Pick a scenario to replay a typical exchange, including the guardrails.</p>
+      <div class="tabs" role="tablist" aria-label="Scenarios">
+        <button class="tab" role="tab" id="tab-expiring" aria-selected="true" data-s="expiring" type="button">Find expiring credits</button>
+        <button class="tab" role="tab" id="tab-draft" aria-selected="false" data-s="draft" type="button">Draft a ticket</button>
+        <button class="tab" role="tab" id="tab-write" aria-selected="false" data-s="write" type="button">Try an unsafe query</button>
+      </div>
+      <div class="console">
+        <div class="console-head"><span>ops-assistant · MCP · 8 tools</span><span id="step-count">step 0 of 0</span></div>
+        <div class="feed" id="feed" aria-live="polite"></div>
+        <div class="replay-actions">
+          <button class="btn" id="next-step" type="button">Next step</button>
+          <button class="btn" id="play-all" type="button">Show all</button>
+          <button class="btn" id="restart" type="button">Restart</button>
+        </div>
+      </div>
+      <p class="note">Illustrative replay with made-up sample data. The real system runs inside AWS and isn't public.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="arch-h">
+    <div class="label"><b>04</b>Architecture</div>
+    <div>
+      <h2 id="arch-h">From source systems to an operator conversation</h2>
+      <p class="lede">Select a layer to see what it does and why it's built that way.</p>
+      <div class="arch" id="arch"></div>
+      <div class="detail" id="arch-detail" aria-live="polite"></div>
+      <div class="principles">
+        <div><h3>Lambda first</h3><p>Deterministic steps run as plain code. AI handles only the steps that need judgment, which keeps cost low and behavior predictable.</p></div>
+        <div><h3>Humans approve money</h3><p>The agent drafts financial tickets and asks before every write. People enter the dollar amounts and submit.</p></div>
+        <div><h3>Remove what you can</h3><p>Cutting three services from the MVP shrank the system and the security review at the same time.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="exp-h">
+    <div class="label"><b>05</b>Experience</div>
+    <div>
+      <h2 id="exp-h">Where the work happened</h2>
+      <div class="jobs">
+        <div class="job">
+          <div class="job-top"><h3>Unify Consulting</h3><span class="when">May 2024 – present</span></div>
+          <div class="role">Senior Consultant, AI Agent Engineering &amp; Cloud Automation</div>
+          <ul>
+            <li>Lead developer and technical architect for an AWS funding-automation platform: conversational agent front end, custom MCP server on Amazon Bedrock AgentCore, and a serverless data hub. MVP built, production launch in progress.</li>
+            <li>Ran the application security review for the agentic system: threat model, OIDC/JWT authentication, audit logging, IaC alarms, incident runbook, privacy review.</li>
+            <li>Built 10 generative AI skills for Amazon Global Real Estate FP&amp;A and trained 8 non-technical analysts to use them.</li>
+            <li>Built a Lambda/SageMaker budgeting pipeline with QuickSight reporting that saves the team about 4 hours a day.</li>
+          </ul>
+        </div>
+        <div class="job">
+          <div class="job-top"><h3>Pricesmith</h3><span class="when">May 2022 – present</span></div>
+          <div class="role">Co-founder &amp; CRO; now Advisor</div>
+          <ul>
+            <li>Co-founded a pricing-strategy SaaS company and led sales, business development, and delivery.</li>
+            <li>Grew a $1B-revenue client's pricing-program revenue 3× year over year, and built its data warehouse and BI from scratch.</li>
+          </ul>
+        </div>
+        <div class="job">
+          <div class="job-top"><h3>Good Food Holdings</h3><span class="when">Nov 2021 – Apr 2022</span></div>
+          <div class="role">Senior Manager, Strategic Pricing</div>
+          <ul><li>Led a pricing team and consolidated four grocery banners' data into one AWS data warehouse with Power BI KPI reporting.</li></ul>
+        </div>
+        <div class="job">
+          <div class="job-top"><h3>Starbucks → Nestlé Coffee Partners</h3><span class="when">Mar 2016 – Nov 2021</span></div>
+          <div class="role">Senior Analyst, Data &amp; Reporting → Strategic Pricing</div>
+          <ul><li>Built BI reporting for about 3,000 users across North America, saving 6–7 hours per analysis, and led data readiness for Nestlé's acquisition of the Starbucks CPG channel.</li></ul>
+        </div>
+        <p class="earlier">Earlier: Pricing Systems Analyst and Credit Specialist at Lynden Inc., 2012–2016. MS Information Management (GPA 3.98, Faculty Award) and BA Economics, University of Washington.</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="skills-h">
+    <div class="label"><b>06</b>Toolkit</div>
+    <div>
+      <h2 id="skills-h">What I build with</h2>
+      <div class="skills">
+        <div><h3>AI &amp; agents</h3><div class="chips"><span class="chip">MCP</span><span class="chip">FastMCP</span><span class="chip">Bedrock AgentCore</span><span class="chip">Amazon Quick Suite</span><span class="chip">Agent guardrails</span><span class="chip">AI skill design</span><span class="chip">Kiro</span></div></div>
+        <div><h3>AWS</h3><div class="chips"><span class="chip">Lambda</span><span class="chip">Step Functions</span><span class="chip">Redshift Serverless</span><span class="chip">EventBridge</span><span class="chip">S3</span><span class="chip">SNS / SQS</span><span class="chip">AppSync</span><span class="chip">IAM / STS</span><span class="chip">CloudWatch</span><span class="chip">CloudFormation</span><span class="chip">SageMaker</span><span class="chip">QuickSight</span></div></div>
+        <div><h3>Integration &amp; auth</h3><div class="chips"><span class="chip">GraphQL</span><span class="chip">REST</span><span class="chip">JSON-RPC</span><span class="chip">OIDC / JWT</span><span class="chip">SigV4</span><span class="chip">Microsoft Graph</span><span class="chip">SAP</span><span class="chip">Oracle / NetSuite</span></div></div>
+        <div><h3>Data &amp; languages</h3><div class="chips"><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">TypeScript</span><span class="chip">R</span><span class="chip">DAX</span><span class="chip">Databricks</span><span class="chip">Power BI</span><span class="chip">Tableau</span><span class="chip">Alteryx</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Riley del Fierro · Seattle, WA</span>
+    <span>Open to applied AI, forward deployed engineering, and AI solutions roles</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  // Copy email
+  var copyBtn = document.getElementById("copy-email");
+  var copyLabel = document.getElementById("copy-label");
+  copyBtn.addEventListener("click", function () {
+    var text = copyBtn.getAttribute("data-copy");
+    var done = function () { copyLabel.textContent = "Copied"; setTimeout(function () { copyLabel.textContent = "Copy"; }, 1600); };
+    try {
+      navigator.clipboard.writeText(text).then(done, function () { selectText(); });
+    } catch (e) { selectText(); }
+    function selectText() {
+      var r = document.createRange(); r.selectNodeContents(copyBtn.firstChild.parentNode);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); copyLabel.textContent = "Selected";
+    }
+  });
+
+  // Replay scenarios (sample data only)
+  var S = {
+    expiring: [
+      { who: "Operator", type: "text", body: "Which credits expire in the next 30 days without a ticket?" },
+      { who: "Agent", type: "call", body: 'list_pending_disbursements({\n  "days": 30,\n  "without_ticket": true\n})' },
+      { who: "Tool", type: "result", body: "deal      milestone  credit     expires\nA-1042    M2         $120,000   Nov 18\nA-1077    M1         $45,000    Nov 24\nB-2210    Q3 rev     $88,500    Nov 30" },
+      { who: "Agent", type: "text", body: "Three credits expire in the next 30 days with no ticket. A-1042 is closest at Nov 18. Want me to draft tickets for any of them?" }
+    ],
+    draft: [
+      { who: "Operator", type: "text", body: "Draft the approval ticket for A-1042." },
+      { who: "Agent", type: "call", body: 'check_attestation({ "deal": "A-1042" })' },
+      { who: "Tool", type: "result", body: "attestation  signed Oct 30\nmilestone    M2 complete\ncredit       eligible, expires Nov 18" },
+      { who: "Guardrail", type: "guard", label: "Confirm", body: "Creating a ticket is a write action, so the agent stops and asks first. Tickets are always created as drafts." },
+      { who: "Agent", type: "text", body: "Attestation checks out. I'll create a DRAFT approval ticket for A-1042, milestone 2. Go ahead?" },
+      { who: "Operator", type: "text", body: "Yes." },
+      { who: "Agent", type: "call", body: 'create_ticket_draft({\n  "deal": "A-1042",\n  "milestone": "M2",\n  "status": "DRAFT"\n})' },
+      { who: "Agent", type: "text", body: "Draft created. Before you submit it, enter the three dollar fields from the credit dashboard: amount, quarterly spend, and credit calculation." }
+    ],
+    write: [
+      { who: "Operator", type: "text", body: "Delete the test rows from the deals table." },
+      { who: "Agent", type: "call", body: 'query_redshift({\n  "sql": "DELETE FROM deals WHERE ..."\n})' },
+      { who: "Guardrail", type: "guard", blocked: true, label: "Blocked", body: "The ad-hoc query tool accepts read-only SELECT statements. Anything that writes or deletes is rejected before it reaches the database." },
+      { who: "Agent", type: "text", body: "I can't change data through ad-hoc queries; that tool is read-only. I can show you which rows look like test data so an engineer can remove them." }
+    ]
+  };
+  var feed = document.getElementById("feed");
+  var counter = document.getElementById("step-count");
+  var current = "expiring", shown = 0;
+
+  function render(step) {
+    var row = document.createElement("div"); row.className = "msg step";
+    var who = document.createElement("div"); who.className = "who"; who.textContent = step.who;
+    var el;
+    if (step.type === "call" || step.type === "result") {
+      el = document.createElement("pre"); el.className = step.type; el.textContent = step.body;
+    } else if (step.type === "guard") {
+      el = document.createElement("p"); el.className = "guard" + (step.blocked ? " blocked" : "");
+      var b = document.createElement("b"); b.textContent = step.label; el.appendChild(b);
+      el.appendChild(document.createTextNode(step.body));
+    } else {
+      el = document.createElement("p"); el.className = "bubble"; el.textContent = step.body;
+    }
+    row.appendChild(who); row.appendChild(el); feed.appendChild(row);
+  }
+  function update() {
+    var total = S[current].length;
+    counter.textContent = "step " + shown + " of " + total;
+    document.getElementById("next-step").disabled = shown >= total;
+  }
+  function reset(n) {
+    feed.innerHTML = ""; shown = 0;
+    for (var i = 0; i < n; i++) next();
+    update();
+  }
+  function next() {
+    var steps = S[current];
+    if (shown < steps.length) { render(steps[shown]); shown++; }
+    update();
+  }
+  document.getElementById("next-step").addEventListener("click", next);
+  document.getElementById("play-all").addEventListener("click", function () { while (shown < S[current].length) next(); });
+  document.getElementById("restart").addEventListener("click", function () { reset(1); });
+  document.querySelectorAll(".tab").forEach(function (t) {
+    t.addEventListener("click", function () {
+      document.querySelectorAll(".tab").forEach(function (x) { x.setAttribute("aria-selected", x === t ? "true" : "false"); });
+      current = t.getAttribute("data-s"); reset(2);
+    });
+  });
+  reset(2);
+
+  // Architecture layers
+  var L = [
+    { k: "01 · sources", t: "Source systems", h: "Three upstream systems of record",
+      p: "Contract records, a credit-calculation service, and program-engagement records. All of them are read through one GraphQL data API instead of separate custom integrations.",
+      li: ["One shared onboarding covers two of the three sources", "Request signing with SigV4; no stored passwords"], c: ["GraphQL", "SigV4", "IAM"] },
+    { k: "02 · ingest", t: "Ingestion", h: "Scheduled, deterministic ingestion",
+      p: "Lambda functions pull and normalize records on EventBridge schedules. Step Functions handle retries and error paths, with dead-letter queues for anything that fails.",
+      li: ["Dry-run mode and direct record lookup for testing", "No AI in this layer: plain code is cheaper and predictable"], c: ["Lambda", "EventBridge", "Step Functions", "SQS"] },
+    { k: "03 · hub", t: "Data hub", h: "One relational hub for every downstream step",
+      p: "Redshift Serverless holds a 15-table schema that maps 242 fields from 5 systems. Each row records its source and load time, and one approval-ready view joins everything the tickets need.",
+      li: ["Scales near zero when idle", "Plain SQL access for finance users"], c: ["Redshift Serverless", "Data API", "SQL"] },
+    { k: "04 · mcp", t: "MCP server", ai: true, h: "Eight tools behind an authenticated gateway",
+      p: "A custom MCP server exposes ingestion, deal lookup, attestation checks, ticket drafting, pending-credit lists, pipeline status, and read-only queries. It runs on Amazon Bedrock AgentCore behind a gateway that checks OIDC/JWT tokens.",
+      li: ["Every tool call is logged with the caller's identity", "Three CloudWatch alarms deployed as infrastructure as code"], c: ["MCP", "FastMCP", "Bedrock AgentCore", "OIDC/JWT", "CloudWatch"] },
+    { k: "05 · agent", t: "Agent", ai: true, h: "A conversational front end instead of a web app",
+      p: "Operators work in plain language. The agent's behavior lives in an instructions document, so the client team can adjust it without deploying code.",
+      li: ["Asks for confirmation before any write", "Ad-hoc SQL is read-only", "Reminds operators which fields need a human"], c: ["Agent instructions", "Guardrails", "Human in the loop"] },
+    { k: "06 · output", t: "Approvals", h: "Draft tickets that people submit",
+      p: "Approval tickets are created through a GraphQL API as drafts. Status changes flow back through SNS so the hub always knows where each ticket stands.",
+      li: ["Cross-account role assumption for API access", "API access secured a week ahead of its 2-week SLA"], c: ["AppSync GraphQL", "SNS", "STS"] }
+  ];
+  var arch = document.getElementById("arch");
+  var detail = document.getElementById("arch-detail");
+  function show(i) {
+    arch.querySelectorAll(".node").forEach(function (n, j) { n.setAttribute("aria-pressed", j === i ? "true" : "false"); });
+    var d = L[i];
+    detail.innerHTML = "";
+    var h = document.createElement("h3"); h.textContent = d.h; detail.appendChild(h);
+    var p = document.createElement("p"); p.textContent = d.p; detail.appendChild(p);
+    var ul = document.createElement("ul");
+    d.li.forEach(function (x) { var li = document.createElement("li"); li.textContent = x; ul.appendChild(li); });
+    detail.appendChild(ul);
+    var chips = document.createElement("div"); chips.className = "chips";
+    d.c.forEach(function (x) { var s = document.createElement("span"); s.className = "chip"; s.textContent = x; chips.appendChild(s); });
+    detail.appendChild(chips);
+  }
+  L.forEach(function (d, i) {
+    var b = document.createElement("button"); b.type = "button"; b.className = "node" + (d.ai ? " ai" : ""); b.id = "layer-" + i;
+    var k = document.createElement("span"); k.className = "k"; k.textContent = d.k;
+    var t = document.createElement("span"); t.className = "t"; t.textContent = d.t;
+    b.appendChild(k); b.appendChild(t);
+    b.addEventListener("click", function () { show(i); });
+    arch.appendChild(b);
+  });
+  show(3);
+})();
+</script>
+
+</body>
+</html>
